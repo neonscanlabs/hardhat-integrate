@@ -29,4 +29,4 @@ etherscan: {
 Comming soon, avaiable when neon support testnet
 
 ### Mainnet
-Comming soon, avaiable when neon support testnet
+Comming soon, avaiable when neon support mainnet
