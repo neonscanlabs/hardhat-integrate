@@ -18,7 +18,7 @@ etherscan: {
       chainId: 245022926,
       urls: {
         apiURL: "https://devnet-api.neonscan.org/hardhat/verify",
-        browserURL: "https://neonscan.org"
+        browserURL: "https://devnet.neonscan.org"
       }
     }
   ]
@@ -26,7 +26,7 @@ etherscan: {
 ```
 
 ### Testnet
-Comming soon, avaiable when neon support testnet
+Comming soon, avaiable when Neon support testnet
 
 ### Mainnet
-Comming soon, avaiable when neon support mainnet
+Comming soon, avaiable when Neon support mainnet
