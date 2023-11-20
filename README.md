@@ -1,16 +1,16 @@
 # Neonscan issue with verifying OpenZeppelin upgrade contracts
-This is an example which demonstrate the issue of NeonScan verifying OpenZeppelin UUPS and Transparent Upgradeable smart contracts.
+This is an example which demonstrate the issue of NeonScan verifying OpenZeppelin **UUPS** and **Transparent Upgradeable** smart contracts.
 
 ### Steps to reproduce the issue:
 * ```npm install``` - Downloading required packages.
 
 ### UUPS
-* ```npx hardhat run scripts/deployUUPS.js --network neondevnet``` - Deploy UUPS on Neon DevNet
-* ```npx hardhat verify --network neondevnet <PROXY_ADDRESS>``` - Try to verify UUPS on Neon DevNet _(here is where the error appears )_
+* ```npx hardhat run scripts/deployUUPS.js --network neondevnet``` - Deploy **UUPS** on Neon DevNet
+* ```npx hardhat verify --network neondevnet <PROXY_ADDRESS>``` - Try to verify **UUPS** on Neon DevNet _( here is where the error appears )_
 
 ### Transparent Upgradeable
-* ```npx hardhat run scripts/deployTransparentUpgradeable.js --network neondevnet``` - Deploy Transparent Upgradeable on Neon DevNet
-* ```npx hardhat verify --network neondevnet <PROXY_ADDRESS>``` - Try to verify Transparent Upgradeable on Neon DevNet _(here is where the error appears )_
+* ```npx hardhat run scripts/deployTransparentUpgradeable.js --network neondevnet``` - Deploy **Transparent Upgradeable** on Neon DevNet
+* ```npx hardhat verify --network neondevnet <PROXY_ADDRESS>``` - Try to verify **Transparent Upgradeable** on Neon DevNet _( here is where the error appears )_
 
 ### Error
 ```
