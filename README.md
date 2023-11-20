@@ -1,136 +1,26 @@
-# Example deploying ERC20 and verify contract to Neonlabs devnet using Hardhat and Neonscan
-This directory contains all the files necessary to deploy simplest ERC20-like contract using Neon onto the Solana blockchain.
-This example base on project https://github.com/neonlabsorg/examples/tree/main/simple-erc20-hardhat
+# Neonscan issue with verifying OpenZeppelin upgrade contracts
+This is an example which demonstrate the issue of NeonScan verifying OpenZeppelin UUPS and Transparent Upgradeable smart contracts.
 
-## Cloning repository
-Run command
-```sh
-git clone https://github.com/neonlabsorg/examples.git
+### Steps to reproduce the issue:
+* ```npm install``` - Downloading required packages.
+
+### UUPS
+* ```npx hardhat run scripts/deployUUPS.js --network neondevnet``` - Deploy UUPS on Neon DevNet
+* ```npx hardhat verify --network neondevnet <PROXY_ADDRESS>``` - Try to verify UUPS on Neon DevNet _(here is where the error appears )_
+
+### Transparent Upgradeable
+* ```npx hardhat run scripts/deployTransparentUpgradeable.js --network neondevnet``` - Deploy Transparent Upgradeable on Neon DevNet
+* ```npx hardhat verify --network neondevnet <PROXY_ADDRESS>``` - Try to verify Transparent Upgradeable on Neon DevNet _(here is where the error appears )_
+
+### Error
+```
+An unexpected error occurred:
+
+Error: Etherscan API call failed with status 504, response: error code: 504
 ```
 
-**NOTE** All the next operations must be performed from the **examples/simple-erc20-hardhat** directory
-
-## Installing requirements
-
-1. Install requirements
-
-```sh
-npm install
+#### Before deploying make sure to create .env file containing the following data ( make a copy of .env.example file and rename it to .env ):
 ```
-
-**NOTE** In case of error try to execute:
-```sh
-npm cache clear --force
+    PRIVATE_KEY_OWNER=XYZ
 ```
-and then back to previous command
-
-## Setup Neon account (using Metamask)
-
-**NOTE** Private keys in **hardhat.config.js** file are compromised so it is highly recommended to setup your own test
-accounts to run this example. This project uses two test accounts. We will call it **account #1** and **account #2**
-To create new accounts:
-1. Setup your Metamask wallet to work with Neon devnet:
-
-    - Connect your metamask wallet to Neon Devnet using these settings:
-        - Network Name: Neon Devnet
-        - New RPC URL: https://devnet.neonevm.org
-        - Chain ID: 245022926
-        - Currency Symbol (optional): NEON
-
-2. Create 2 new accounts in Metamask
-3. Airdrop at most 100 NEONs to just created **account #1** [from here](https://neonfaucet.org/)
-4. Copy your Metamask account's private keys (Account Details >> Export Private Key) and insert them into **hardhat.config.js**
-   at lines 9 (**account #1**) and line 10 (**account #2**) **NOTE!** Add **0x** prefix at the beginning
-
-## Running tests on denvet
-
-Execute command
-
-```sh
-./node_modules/.bin/hardhat test
-```
-
-This command will do next:
-1. Compile all smart-contracts related to this project
-2. Deploy these smart-contracts to the Neon devnet
-3. Run tests from ./test/test_erc20.js
-
-After successfully running this step you should get console output similar to:
-```sh
-Compiled 2 Solidity files successfully
-
-
-  Testing TestERC20 contract
-    ✔ should successfully mint 10000 ERC20 in the first account (15967ms)
-    ✔ should transfer token correctly (31327ms)
-
-
-  2 passing (53s)
-
-```
-
-## Compiling and deploying contract
-
-1. Compiling contract
-```sh
-./node_modules/.bin/hardhat compile
-```
-3. Deploying contract
-```sh
-./node_modules/.bin/hardhat run ./scripts/deploy.js
-```
-
-After successfully running this step you should get console output similar to:
-
-```sh
-Deploying contracts with the account: 0xf71c4DACa893E5333982e2956C5ED9B648818376
-Contract address is:  0x49DCDEc367bba4271876259AE473890aa5AABc2e
-Minting  100000000000  tokens...
-
-```
-
-This project contains only one deployment script which performs two actions:
-1. Deploying test ERC20 smart-contract
-2. Minting 100 TERC20 token
-   to **account #1** specified in **hardhat.config.js** file on line 9
-
-In migration command output, in the line ```Contract address is:  0x49DCDEc367bba4271876259AE473890aa5AABc2e``` is our
-new ERC20 token contract address. You can easily import it into your Metamask wallet. After it you can transfer new
-token from previously created **account #1**
-
-## Verify contract using hardhat and Neonscan
-1. Config hardhat.config.js
-```js
-etherscan: {
-  apiKey: {
-    neonevm: "test"
-  },
-  customChains: [
-    {
-      network: "neonevm",
-      chainId: 245022926,
-      urls: {
-        apiURL: "https://devnet-api.neonscan.org/hardhat/verify",
-        browserURL: "https://devnet.neonscan.org"
-      }
-    }
-  ]
-}
-```
-
-2. Verify
-```sh
-./node_modules/.bin/hardhat verify 0x49DCDEc367bba4271876259AE473890aa5AABc2e
-```
-
-After successfully running this step you should get console output similar to:
-
-```sh
-Successfully submitted source code for contract
-contracts/ERC20.sol:ERC20 at 0x49DCDEc367bba4271876259AE473890aa5AABc2e
-for verification on the block explorer. Waiting for verification result...
-
-Successfully verified contract ERC20 on Etherscan.
-https://devnet.neonscan.org/address/0x49DCDEc367bba4271876259AE473890aa5AABc2e#code
-
-```
+- *PRIVATE_KEY_OWNER - the private key of the owner used to deploy the contracts.*

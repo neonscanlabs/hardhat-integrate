@@ -1,16 +1,19 @@
 {
-  "name": "hardhat-project",
-  "devDependencies": {
-    "@nomiclabs/hardhat-ethers": "^2.0.5",
-    "@nomiclabs/hardhat-waffle": "^2.0.2",
-    "@openzeppelin/contracts": "^4.3.2",
-    "base58-js": "*",
-    "chai": "^4.3.6",
-    "ethereum-waffle": "^3.4.0",
-    "ethers": "^5.5.4",
-    "hardhat": "^2.8.4"
+  "name": "ERC20ForSPL",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {
-    "@nomiclabs/hardhat-etherscan": "^3.1.1"
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^3.0.0",
+    "@openzeppelin/contracts": "^5.0.0",
+    "@openzeppelin/contracts-upgradeable": "^5.0.0",
+    "@openzeppelin/hardhat-upgrades": "^2.3.3",
+    "dotenv": "^16.3.1",
+    "hardhat": "^2.18.1"
   }
 }
